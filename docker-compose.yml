@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+  front:
+    platform: linux/x86_64
+    build: .
+    container_name: front
+    command: dev
+    working_dir: /app
+    user: "${UID:-1000}:${GID:-1000}"
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/app
+    networks:
+      - srcnet
+    environment:
+     - NODE_OPTIONS=--openssl-legacy-provider
+networks:
+  srcnet:
+    driver: bridge

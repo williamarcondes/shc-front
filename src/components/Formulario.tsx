@@ -12,7 +12,7 @@ interface FormularioProps {
 export default function Formulario(props: FormularioProps) {
     const id = props.clinica?.id
     const [nome, setNome] = useState(props.clinica?.nome ?? '')
-    const [idade, setIdade] = useState(props.clinica?.idade ?? 0)
+    const [cidade, setCidade] = useState(props.clinica?.cidade ?? '')
 
     return (
         <div>
@@ -33,12 +33,12 @@ export default function Formulario(props: FormularioProps) {
             <Entrada
                 texto="Idade"
                 tipo="number"
-                valor={idade}
-                valorMudou={setIdade}
+                valor={cidade}
+                valorMudou={setCidade}
             />
             <div className="flex justify-end mt-7">
                 <Button cor="blue" className="mr-2"
-                    onClick={() => props.clinicaMudou?.(new Clinica(nome, +idade, id))}>
+                    onClick={() => props.clinicaMudou?.(new Clinica(id, nome, cidade, cidade))}>
                     {id ? 'Alterar' : 'Salvar'}
                 </Button>
                 <Button onClick={props.cancelado}>

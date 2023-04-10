@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import Clinica from "../core/Clinica"
-import ClinicaRepositorio from "../core/ClinicaRepositorio"
 import useTableOuForm from "./useTableOrForm"
 const axios = require('axios');
 
@@ -13,11 +12,11 @@ export default function useClinicas() {
     useEffect(obterTodos, [])
 
     function obterTodos() {
-      axios.get();
+    console.log('aa');  
     }
 
     function selecionarClinica(clinica: Clinica) {
-        setClinica(clinica)
+        setClinica(clinica);
         exibirFormulario()
     }
 
