@@ -14,9 +14,9 @@ services:
       - ./:/data/app
       - /app/node_modules
     networks:
-      - srcnet
+      - shc_net
     environment:
      - NODE_OPTIONS=--openssl-legacy-provider
 networks:
-  srcnet:
-    driver: bridge
+  shc_net:
+    external: true

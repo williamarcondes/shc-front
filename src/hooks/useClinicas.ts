@@ -9,8 +9,20 @@ export default function useClinicas() {
   const [clinica, setClinica] = useState<Clinica>(Clinica.vazio());
   const [clinicas] = useState<Clinica[]>([]);
 
+  const instance = axios.create({
+    baseURL: 'http://localhost:6060',
+    // baseURL: 'https://pokeapi.co/api/v2/',
+  });
+
   function obterTodos() {
-    console.log('aa');
+    instance
+      .get('clinics/1')
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   useEffect(obterTodos, []);
@@ -30,10 +42,13 @@ export default function useClinicas() {
   }
 
   async function salvarClinica() {
-    axios
-      .post('/user', {
-        firstName: 'Fred',
-        lastName: 'Flintstone',
+    instance
+      .post('/clinics', {
+        name: 'Moebao',
+        city: 'Poços de Caldas',
+        street: 'Rua Assis',
+        number: 56,
+        uf: 'MG',
       })
       .then((response) => {
         console.log(response);
