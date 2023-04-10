@@ -11,7 +11,6 @@ export default function useClinicas() {
 
   const instance = axios.create({
     baseURL: 'http://localhost:6060',
-    // baseURL: 'https://pokeapi.co/api/v2/',
   });
 
   function obterTodos() {
