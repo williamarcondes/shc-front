@@ -1,18 +1,30 @@
+/* eslint-disable max-params */
 export default class Clinica {
   #id: number;
   #nome: string;
   #cidade: string;
   #estado: string;
+  #numero: number;
+  #rua: string;
 
-  constructor(id: number, nome: string, cidade: string, estado: string = null) {
+  constructor(
+    id: number,
+    nome: string,
+    cidade: string,
+    estado: string,
+    numero: number,
+    rua: string,
+  ) {
     this.#id = id;
     this.#nome = nome;
     this.#cidade = cidade;
-    this.#estado = this.estado;
+    this.#rua = rua;
+    this.#numero = numero;
+    this.#estado = estado;
   }
 
   static vazio() {
-    return new Clinica(0, '', '');
+    return new Clinica(0, '', '', '', 0, '');
   }
 
   get id() {
@@ -29,5 +41,13 @@ export default class Clinica {
 
   get cidade() {
     return this.#cidade;
+  }
+
+  get numero() {
+    return this.#numero;
+  }
+
+  get rua() {
+    return this.#rua;
   }
 }
