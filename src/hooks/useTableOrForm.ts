@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function useTableOrForm() {
-    const [visivel, setVisivel] = useState<'table' | 'form'>('table')
+  const [visivel, setVisivel] = useState<'table' | 'form'>('table');
 
-    const exibirTable = () => setVisivel('table')
-    const exibirFormulario = () => setVisivel('form')
+  const exibirTable = () => setVisivel('table');
+  const exibirFormulario = () => setVisivel('form');
 
-    return {
-        formularioVisivel: visivel === 'form',
-        tableVisivel: visivel === 'table',
-        exibirTable,
-        exibirFormulario,
-    }
+  return {
+    formularioVisivel: visivel === 'form',
+    tableVisivel: visivel === 'table',
+    exibirTable,
+    exibirFormulario,
+  };
 }
