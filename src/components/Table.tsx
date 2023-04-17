@@ -14,9 +14,9 @@ export default function Table(props: TableProps) {
   function renderizarCabecalho() {
     return (
       <tr>
-        <th className='text-left p-4'>Nome</th>
-        <th className='text-left p-4'>Cidade</th>
-        <th className='text-left p-4'>Estado</th>
+        <th className='text-left p-4'>Name</th>
+        <th className='text-left p-4'>City</th>
+        <th className='text-left p-4'>State</th>
         {exibirAcoes ? <th className='p-4'>Ações</th> : false}
       </tr>
     );
@@ -60,9 +60,9 @@ export default function Table(props: TableProps) {
   function renderizarDados() {
     return props.clinicas?.map((clinica, i) => (
         <tr key={clinica.id} className={`${i % 2 === 0 ? 'bg-blue-200' : 'bg-blue-100'}`}>
-          <td className='text-left p-4'>{clinica.nome}</td>
-          <td className='text-left p-4'>{clinica.cidade}</td>
-          <td className='text-left p-4'>{clinica.estado}</td>
+          <td className='text-left p-4'>{clinica.name}</td>
+          <td className='text-left p-4'>{clinica.city}</td>
+          <td className='text-left p-4'>{clinica.state}</td>
           {exibirAcoes ? renderizarAcoes(clinica) : false}
         </tr>
     ));

@@ -46,7 +46,7 @@ export default function Home() {
               />
             </>
           ) : (
-            <Formulario clinica={clinica} clinicaMudou={salvarClinica} cancelado={exibirTable} />
+            <Formulario clinica={clinicas[0]} clinicaMudou={salvarClinica} cancelado={exibirTable} />
           )}
         </Layout>
       </div>

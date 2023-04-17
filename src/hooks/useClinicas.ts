@@ -7,7 +7,7 @@ export default function useClinicas() {
   const { tableVisivel, exibirTable, exibirFormulario } = useTableOuForm();
 
   const [clinica, setClinica] = useState<Clinica>(Clinica.vazio());
-  const [clinicas] = useState<Clinica[]>([]);
+  const [clinicas, setClinicas] = useState<Clinica[]>([]);
 
   const instance = axios.create({
     baseURL: 'http://localhost:6060',
@@ -17,22 +17,30 @@ export default function useClinicas() {
     instance
       .get('clinics/1')
       .then((response) => {
-        console.log(response);
+        setClinicas([response.data.clinic]);
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
-  useEffect(obterTodos, []);
+  useEffect(obterTodos, [instance]);
 
-  function selecionarClinica() {
-    setClinica(clinica);
+  function selecionarClinica(selectedClinica: Clinica) {
+    setClinica(selectedClinica);
     exibirFormulario();
   }
 
-  async function excluirClinica() {
-    console.log('Não implementado');
+  async function excluirClinica(selectedClinica: Clinica) {
+    await instance
+      .delete(`clinics/${selectedClinica.id}`)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    obterTodos();
   }
 
   function novoClinica() {
@@ -41,11 +49,12 @@ export default function useClinicas() {
   }
 
   async function salvarClinica() {
+    console.log('_____.>>>>', clinica);
     instance
       .post('/clinics', {
         name: 'Moebao',
         city: 'Poços de Caldas',
-        street: 'Rua Assis',
+        street: 'Street Assis',
         number: 56,
         uf: 'MG',
       })
