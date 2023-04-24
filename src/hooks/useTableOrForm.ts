@@ -1,15 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function useTableOrForm() {
-  const [visible, setVisible] = useState<'table' | 'form'>('table');
+  const [visible, setVisible] = useState<'table' | 'form' | 'profile'>('table');
 
-  const showTable = () => setVisible('table');
-  const showForms = () => setVisible('form');
+  useEffect(() => {
+    console.log('Estado atualizado:', visible);
+  }, [visible]);
+
+  const showTable = () => {
+    setVisible('table');
+  };
+
+  const showForms = () => {
+    setVisible('form');
+  };
+
+  const showProfile = () => {
+    setVisible('profile');
+  };
 
   return {
-    formularioVisivel: visible === 'form',
+    visibleForm: visible === 'form',
     visibleTable: visible === 'table',
+    visibleProfile: visible === 'profile',
     showTable,
     showForms,
+    showProfile,
   };
 }

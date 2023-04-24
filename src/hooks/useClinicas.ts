@@ -4,7 +4,7 @@ import Clinica from '../core/Clinica';
 import useTableOuForm from './useTableOrForm';
 
 export default function useClinicas() {
-  const { visibleTable, showTable, showForms } = useTableOuForm();
+  const { visibleTable, visibleProfile, visibleForm, showTable, showForms, showProfile } = useTableOuForm();
 
   const [clinica, setClinica] = useState<Clinica>(Clinica.vazio() as Clinica);
   const [clinicas, setClinicas] = useState<Clinica[]>([]);
@@ -29,14 +29,20 @@ export default function useClinicas() {
 
   useEffect(obterTodos, [clinicas, instance]);
 
-  function selecionarClinica(selectedClinica: Clinica) {
-    setClinica(selectedClinica);
+  function visualizarClinica(currentClinica: Clinica) {
+    setClinica(currentClinica);
+    showProfile();
+  }
+
+  function editarClinica(currentClinica: Clinica) {
+    console.log('entrou');
+    setClinica(currentClinica);
     showForms();
   }
 
-  async function excluirClinica(selectedClinica: Clinica) {
+  async function excluirClinica(currentClinica: Clinica) {
     await instance
-      .delete(`clinics/${selectedClinica.id}`)
+      .delete(`clinics/${currentClinica.id}`)
       .then((response) => {
         console.log(response);
       })
@@ -98,9 +104,12 @@ export default function useClinicas() {
     novoClinica,
     salvarClinica,
     excluirClinica,
-    selecionarClinica,
+    editarClinica,
+    visualizarClinica,
     obterTodos,
     visibleTable,
+    visibleForm,
+    visibleProfile,
     showTable,
   };
 }
