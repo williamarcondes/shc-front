@@ -59,7 +59,6 @@ export default function useClinicas() {
         console.log(response);
       })
       .catch((error) => {
-        console.log(currentClinica);
         console.log(error);
       });
   }
@@ -77,7 +76,6 @@ export default function useClinicas() {
         console.log(response);
       })
       .catch((error) => {
-        console.log(currentClinica);
         console.log(error);
       });
   }
@@ -88,8 +86,10 @@ export default function useClinicas() {
   }
 
   function salvarClinica(currentClinica: Clinica) {
-    if (currentClinica.id === 0) return criarClinica(currentClinica);
-    atualizarClinica(currentClinica);
+    if (currentClinica.id === 0) criarClinica(currentClinica);
+    if (currentClinica.id !== 0) atualizarClinica(currentClinica);
+    obterTodos();
+    showTable();
   }
 
   return {
