@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
 import Button from './Button';
-import FormularioFuncionario from './FormularioFuncionario';
 import Clinica from '../core/Clinica';
 import useFuncionarios from '../hooks/useFuncionarios';
+import FormularioFuncionario from './FormularioFuncionario';
 
 interface ClinicaProps {
   clinica: Clinica;
@@ -10,18 +9,7 @@ interface ClinicaProps {
 }
 
 export default function ClinicaCard(props: ClinicaProps) {
-  const { novoFuncionario } = useFuncionarios();
-
-  const [visible, setVisible] = useState<'form' | ''>('');
-  useEffect(() => {}, [visible]);
-
-  const showForms = () => {
-    setVisible('form');
-  };
-
-  const hideForms = () => {
-    setVisible('');
-  };
+  const { novoFuncionario, hideForms, visible, funcionario } = useFuncionarios();
 
   return (
     <div className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
@@ -31,7 +19,7 @@ export default function ClinicaCard(props: ClinicaProps) {
           <Button onClick={() => props.clinicaEditar?.(props.clinica)} className='mr-2'>
             Editar
           </Button>
-          <Button cor='blue' onClick={showForms}>
+          <Button cor='blue' onClick={novoFuncionario}>
             Adicionar Funcionário
           </Button>
         </div>
@@ -51,6 +39,7 @@ export default function ClinicaCard(props: ClinicaProps) {
           clinica={props.clinica}
           cancelado={hideForms}
           funcionarioMudou={novoFuncionario}
+          funcionario={funcionario}
         />
       ) : (
         <></>

@@ -1,10 +1,18 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Funcionario from '../core/Funcionario';
-import useTableOuForm from './useTableOrForm';
 
 export default function useFuncionarios() {
-  const { visibleTable, visibleProfile, visibleForm, showTable, showForms, showProfile } = useTableOuForm();
+  const [visible, setVisible] = useState<'form' | ''>('');
+  useEffect(() => {}, [visible]);
+
+  const showForms = () => {
+    setVisible('form');
+  };
+
+  const hideForms = () => {
+    setVisible('');
+  };
 
   const [funcionario, setFuncionario] = useState<Funcionario>(Funcionario.vazio() as Funcionario);
   const [funcionarios, setFuncionarios] = useState<Funcionario[]>([]);
@@ -31,12 +39,10 @@ export default function useFuncionarios() {
 
   function visualizarFuncionario(currentFuncionario: Funcionario) {
     setFuncionario(currentFuncionario);
-    showProfile();
   }
 
   function editarFuncionario(currentFuncionario: Funcionario) {
     setFuncionario(currentFuncionario);
-    showForms();
   }
 
   async function excluirFuncionario(currentFuncionario: Funcionario) {
@@ -60,7 +66,6 @@ export default function useFuncionarios() {
       .then(() => {
         console.log(`${currentFuncionario.name} Criado com sucesso`);
         obterTodos();
-        showTable();
       })
       .catch((error) => {
         console.log(error);
@@ -76,7 +81,6 @@ export default function useFuncionarios() {
       .then(() => {
         console.log(`${currentFuncionario.name} Atualizado com sucesso`);
         obterTodos();
-        showTable();
       })
       .catch((error) => {
         console.log(error);
@@ -102,9 +106,8 @@ export default function useFuncionarios() {
     editarFuncionario,
     visualizarFuncionario,
     obterTodos,
-    visibleTable,
-    visibleForm,
-    visibleProfile,
-    showTable,
+    showForms,
+    hideForms,
+    visible,
   };
 }
