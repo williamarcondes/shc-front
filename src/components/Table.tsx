@@ -37,9 +37,7 @@ export default function Table(props: TableProps) {
           >
             {IconeVer}
           </button>
-        ) : (
-          false
-        )}
+        ) : null}
         {props.clinicaEditar ? (
           <button
             onClick={() => props.clinicaEditar?.(clinica)}
@@ -51,9 +49,7 @@ export default function Table(props: TableProps) {
           >
             {IconeEdicao}
           </button>
-        ) : (
-          false
-        )}
+        ) : null}
         {props.clinicaExcluido ? (
           <button
             onClick={() => props.clinicaExcluido?.(clinica)}
@@ -65,26 +61,24 @@ export default function Table(props: TableProps) {
           >
             {IconeLixo}
           </button>
-        ) : (
-          false
-        )}
+        ) : null}
       </td>
     );
   }
 
   function renderizarDados() {
     return props.clinicas?.map((clinica, i) => (
-        <tr key={clinica.id} className={`${i % 2 === 0 ? 'bg-blue-200' : 'bg-blue-100'}`}>
-          <td className='text-left p-4'>{clinica.name}</td>
-          <td className='text-left p-4'>{clinica.city}</td>
-          <td className='text-left p-4'>{clinica.uf}</td>
-          {exibirAcoes ? renderizarAcoes(clinica) : false}
-        </tr>
+      <tr key={clinica.id} className={`${i % 2 === 0 ? 'bg-blue-200' : 'bg-blue-100'}`}>
+        <td className='text-left p-4'>{clinica.name}</td>
+        <td className='text-left p-4'>{clinica.city}</td>
+        <td className='text-left p-4'>{clinica.uf}</td>
+        {exibirAcoes ? renderizarAcoes(clinica) : false}
+      </tr>
     ));
   }
-  
+
   return (
-    <table id='1' className='w-full rounded-xl overflow-hidden'>
+    <table id='1' className='w-full rounded-xl overflow-hidden table-auto'>
       <thead
         className={`
                 text-gray-100

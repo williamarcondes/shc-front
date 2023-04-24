@@ -6,6 +6,7 @@ import Table from '../components/Table';
 import { IconeLogo } from '../components/Icones';
 
 import useClinicas from '../hooks/useClinicas';
+import ClinicaCard from '../components/ClinicaCard';
 
 export default function Home() {
   const {
@@ -40,21 +41,24 @@ export default function Home() {
 
   const form = <Formulario clinica={clinica} clinicaMudou={salvarClinica} cancelado={showTable} />;
 
-  const profile = <h1>Ok</h1>;
+  const profile = (
+   <ClinicaCard clinica={clinica} clinicaEditar={editarClinica}/>
+  );
 
   return (
     <div className={'bg-gradient-to-r from-blue-500 to-blue-500 h-screen items-center'}>
-      <div className={'flex ml-60'}>
+      <meta name='viewport' content='width=device-width, initial-scale=1.0'></meta>
+      <div className={'flex col-auto justify-center py-2'}>
         {IconeLogo}
-        <div className='mt-7'>
+        <div className='mt-4'>
           <Link href='/'>
-            <a className='text-gray-200 font-medium ml-60 hover:text-gray-900'>Clínicas</a>
+            <a className='text-gray-200 font-medium ml-4 hover:text-gray-900'>Clínicas</a>
           </Link>
           <Link href='/'>
-            <a className='text-gray-200 font-medium ml-60 hover:text-gray-500'>Quem somos?</a>
+            <a className='text-gray-200 font-medium ml-4 hover:text-gray-500'>Quem somos?</a>
           </Link>
           <Link href='/'>
-            <a className='text-gray-200 font-medium ml-60 hover:text-gray-500'>Dê seu Feedback</a>
+            <a className='text-gray-200 font-medium ml-4 hover:text-gray-500'>Dê seu Feedback</a>
           </Link>
         </div>
       </div>
