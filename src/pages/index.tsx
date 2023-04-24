@@ -14,8 +14,8 @@ export default function Home() {
     salvarClinica,
     selecionarClinica,
     excluirClinica,
-    tableVisivel,
-    exibirTable,
+    visibleTable,
+    showTable,
   } = useClinicas();
 
   const svgString = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="20%" height="20%"><g transform="rotate(180, 250, 250)"><path d="M250,50 L435,200 A130,130 0 0,1 250,450 A130,130 0 0,1 65,200 L250,50 Z" fill="#BF0A30"/></g><text x="50%" y="42%" dominant-baseline="middle" text-anchor="middle" font-size="180" font-family="Arial" fill="#ffffff">SHC</text></svg>';
@@ -32,7 +32,7 @@ export default function Home() {
       </div>
       <div className={'flex justify-center'}>
         <Layout titulo='Cadastro Clínicas'>
-          {tableVisivel ? (
+          {visibleTable ? (
             <>
               <div className='flex justify-end'>
                 <Button cor='green' className='mb-4' onClick={novoClinica}>
@@ -46,7 +46,7 @@ export default function Home() {
               />
             </>
           ) : (
-            <Formulario clinica={clinicas[0]} clinicaMudou={salvarClinica} cancelado={exibirTable} />
+            <Formulario clinica={clinica} clinicaMudou={salvarClinica} cancelado={showTable} />
           )}
         </Layout>
       </div>

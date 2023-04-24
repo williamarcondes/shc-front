@@ -83,9 +83,7 @@
         "ignoreRegExpLiterals": true
       }
     ],
-    "complexity": ["error", 5],
     "import/no-extraneous-dependencies": ["off"],
-    "sonarjs/cognitive-complexity": ["error", 5],
     "sonarjs/no-one-iteration-loop": ["error"],
     "sonarjs/no-identical-expressions": ["error"],
     "sonarjs/no-use-of-empty-return-value": ["error"],

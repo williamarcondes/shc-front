@@ -3,7 +3,7 @@ export default class Clinica {
   #id: number;
   #name: string;
   #city: string;
-  #state: string;
+  #uf: string;
   #number: number;
   #street: string;
 
@@ -11,7 +11,7 @@ export default class Clinica {
     id: number,
     name: string,
     city: string,
-    state: string,
+    uf: string,
     number: number,
     street: string,
   ) {
@@ -20,7 +20,7 @@ export default class Clinica {
     this.#city = city;
     this.#street = street;
     this.#number = number;
-    this.#state = state;
+    this.#uf = uf;
   }
 
   static vazio() {
@@ -31,8 +31,8 @@ export default class Clinica {
     return this.#id;
   }
 
-  get state() {
-    return this.#state;
+  get uf() {
+    return this.#uf;
   }
 
   get name() {

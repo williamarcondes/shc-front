@@ -4,9 +4,9 @@ import Clinica from '../core/Clinica';
 import useTableOuForm from './useTableOrForm';
 
 export default function useClinicas() {
-  const { tableVisivel, exibirTable, exibirFormulario } = useTableOuForm();
+  const { visibleTable, showTable, showForms } = useTableOuForm();
 
-  const [clinica, setClinica] = useState<Clinica>(Clinica.vazio());
+  const [clinica, setClinica] = useState<Clinica>(Clinica.vazio() as Clinica);
   const [clinicas, setClinicas] = useState<Clinica[]>([]);
 
   const instance = axios.create({
@@ -15,20 +15,23 @@ export default function useClinicas() {
 
   function obterTodos() {
     instance
-      .get('clinics/1')
+      .get('clinics')
       .then((response) => {
-        setClinicas([response.data.clinic]);
+        const newClinicas = response.data.clinics;
+        if (JSON.stringify(newClinicas) !== JSON.stringify(clinicas)) {
+          setClinicas(newClinicas);
+        }
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
-  useEffect(obterTodos, [instance]);
+  useEffect(obterTodos, [clinicas, instance]);
 
   function selecionarClinica(selectedClinica: Clinica) {
     setClinica(selectedClinica);
-    exibirFormulario();
+    showForms();
   }
 
   async function excluirClinica(selectedClinica: Clinica) {
@@ -45,23 +48,23 @@ export default function useClinicas() {
 
   function novoClinica() {
     setClinica(Clinica.vazio());
-    exibirFormulario();
+    showForms();
   }
 
-  async function salvarClinica() {
-    console.log('_____.>>>>', clinica);
+  async function salvarClinica(currentClinica: Clinica) {
     instance
       .post('/clinics', {
-        name: 'Moebao',
-        city: 'Poços de Caldas',
-        street: 'Street Assis',
-        number: 56,
-        uf: 'MG',
+        name: currentClinica.name,
+        city: currentClinica.city,
+        street: currentClinica.street,
+        number: +currentClinica.number,
+        uf: currentClinica.uf,
       })
       .then((response) => {
         console.log(response);
       })
       .catch((error) => {
+        console.log(currentClinica);
         console.log(error);
       });
   }
@@ -74,7 +77,7 @@ export default function useClinicas() {
     excluirClinica,
     selecionarClinica,
     obterTodos,
-    tableVisivel,
-    exibirTable,
+    visibleTable,
+    showTable,
   };
 }

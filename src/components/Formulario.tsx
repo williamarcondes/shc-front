@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 import { useState } from 'react';
 import Clinica from '../core/Clinica';
 import Button from './Button';
@@ -14,30 +13,30 @@ export default function Formulario(props: FormularioProps) {
   const id = props.clinica?.id;
   const [name, setName] = useState(props.clinica?.name ?? '');
   const [city, setCity] = useState(props.clinica?.city ?? '');
-  const [state, setState] = useState(props.clinica?.state ?? '');
+  const [uf, setUf] = useState(props.clinica?.uf ?? '');
   const [street, setStreet] = useState(props.clinica?.street ?? '');
   const [number, setNumber] = useState(props.clinica?.number ?? 0);
 
   return (
     <div>
       {id ? <Entrada somenteLeitura texto='Código' valor={id} className='mb-5' /> : false}
-      <Entrada texto='Name' valor={name} valorMudou={setName} className='mb-5' />
+      <Entrada texto='Nome' valor={name} valorMudou={setName} className='mb-5' />
       <div className='flex flex-row'>
         <div className='w-5/6 pr-2'>
-          <Entrada texto='City' valor={city} valorMudou={setCity} />
+          <Entrada texto='Cidade' valor={city} valorMudou={setCity} />
         </div>
 
         <div className='w-1/6 pr-2'>
-          <Entrada texto='State' valor={state} valorMudou={setState} />
+          <Entrada texto='UF' valor={uf} valorMudou={setUf} />
         </div>
       </div>
       <div className='flex flex-row'>
         <div className='w-5/6 pr-2'>
-          <Entrada texto='Street' valor={street} valorMudou={setStreet} />
+          <Entrada texto='Rua' valor={street} valorMudou={setStreet} />
         </div>
 
         <div className='w-1/6 pr-2'>
-          <Entrada texto='Number' tipo='number' valor={number} valorMudou={setNumber} />
+          <Entrada texto='Número' tipo='number' valor={number} valorMudou={setNumber} />
         </div>
       </div>
 
@@ -45,7 +44,7 @@ export default function Formulario(props: FormularioProps) {
         <Button
           cor='blue'
           className='mr-2'
-          onClick={() => props.clinicaMudou?.(new Clinica(id, name, city, state, number, street))}
+          onClick={() => props.clinicaMudou?.(new Clinica(id, name, city, uf, number, street))}
         >
           {id ? 'Alterar' : 'Salvar'}
         </Button>
