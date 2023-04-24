@@ -46,12 +46,7 @@ export default function useClinicas() {
     obterTodos();
   }
 
-  function novoClinica() {
-    setClinica(Clinica.vazio());
-    showForms();
-  }
-
-  async function salvarClinica(currentClinica: Clinica) {
+  async function criarClinica(currentClinica: Clinica) {
     instance
       .post('/clinics', {
         name: currentClinica.name,
@@ -67,6 +62,34 @@ export default function useClinicas() {
         console.log(currentClinica);
         console.log(error);
       });
+  }
+
+  async function atualizarClinica(currentClinica: Clinica) {
+    instance
+      .put(`/clinics/${currentClinica.id}`, {
+        name: currentClinica.name,
+        city: currentClinica.city,
+        street: currentClinica.street,
+        number: +currentClinica.number,
+        uf: currentClinica.uf,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(currentClinica);
+        console.log(error);
+      });
+  }
+
+  function novoClinica() {
+    setClinica(Clinica.vazio());
+    showForms();
+  }
+
+  function salvarClinica(currentClinica: Clinica) {
+    if (currentClinica.id === 0) return criarClinica(currentClinica);
+    atualizarClinica(currentClinica);
   }
 
   return {
