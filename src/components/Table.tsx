@@ -1,15 +1,16 @@
 /* eslint-disable max-lines-per-function */
 import Clinica from '../core/Clinica';
-import { IconeEdicao, IconeLixo } from './Icones';
+import { IconeEdicao, IconeLixo, IconeVer } from './Icones';
 
 interface TableProps {
   clinicas: Clinica[];
-  clinicaSelecionado?: (clinica: Clinica) => void;
+  clinicaEditar?: (clinica: Clinica) => void;
   clinicaExcluido?: (clinica: Clinica) => void;
+  clinicaVisualizar?: (clinica: Clinica) => void;
 }
 
 export default function Table(props: TableProps) {
-  const exibirAcoes = props.clinicaExcluido || props.clinicaSelecionado;
+  const exibirAcoes = props.clinicaExcluido || props.clinicaEditar;
 
   function renderizarCabecalho() {
     return (
@@ -25,9 +26,23 @@ export default function Table(props: TableProps) {
   function renderizarAcoes(clinica: Clinica) {
     return (
       <td className='flex justify-center'>
-        {props.clinicaSelecionado ? (
+        {props.clinicaVisualizar ? (
           <button
-            onClick={() => props.clinicaSelecionado?.(clinica)}
+            onClick={() => props.clinicaVisualizar?.(clinica)}
+            className={`
+                        flex justify-center items-center
+                        text-blue-600 rounded-full p-2 m-1
+                        hover:bg-blue-50
+                    `}
+          >
+            {IconeVer}
+          </button>
+        ) : (
+          false
+        )}
+        {props.clinicaEditar ? (
+          <button
+            onClick={() => props.clinicaEditar?.(clinica)}
             className={`
                         flex justify-center items-center
                         text-green-600 rounded-full p-2 m-1
