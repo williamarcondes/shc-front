@@ -3,9 +3,7 @@ import { useEffect, useState } from 'react';
 export default function useTableOrForm() {
   const [visible, setVisible] = useState<'table' | 'form' | 'profile'>('table');
 
-  useEffect(() => {
-    console.log('Estado atualizado:', visible);
-  }, [visible]);
+  useEffect(() => {}, [visible]);
 
   const showTable = () => {
     setVisible('table');

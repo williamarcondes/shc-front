@@ -35,7 +35,6 @@ export default function useClinicas() {
   }
 
   function editarClinica(currentClinica: Clinica) {
-    console.log('entrou');
     setClinica(currentClinica);
     showForms();
   }
@@ -61,8 +60,10 @@ export default function useClinicas() {
         number: +currentClinica.number,
         uf: currentClinica.uf,
       })
-      .then((response) => {
-        console.log(response);
+      .then(() => {
+        console.log(`${currentClinica.name} Criado com sucesso`);
+        obterTodos();
+        showTable();
       })
       .catch((error) => {
         console.log(error);
@@ -78,8 +79,10 @@ export default function useClinicas() {
         number: +currentClinica.number,
         uf: currentClinica.uf,
       })
-      .then((response) => {
-        console.log(response);
+      .then(() => {
+        console.log(`${currentClinica.name} Atualizado com sucesso`);
+        obterTodos();
+        showTable();
       })
       .catch((error) => {
         console.log(error);
@@ -94,8 +97,6 @@ export default function useClinicas() {
   function salvarClinica(currentClinica: Clinica) {
     if (currentClinica.id === 0) criarClinica(currentClinica);
     if (currentClinica.id !== 0) atualizarClinica(currentClinica);
-    obterTodos();
-    showTable();
   }
 
   return {
