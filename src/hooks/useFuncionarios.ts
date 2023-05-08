@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Funcionario from '../core/Funcionario';
 
-export default function useFuncionarios() {
+export default function useFuncionarios(clinicaId: number) {
   const [visible, setVisible] = useState<'form' | ''>('');
   useEffect(() => {}, [visible]);
 
@@ -23,9 +23,9 @@ export default function useFuncionarios() {
 
   function obterTodos() {
     instance
-      .get('funcionarios')
+      .get('employees')
       .then((response) => {
-        const newFuncionarios = response.data.funcionarios;
+        const newFuncionarios = response.data.employees;
         if (JSON.stringify(newFuncionarios) !== JSON.stringify(funcionarios)) {
           setFuncionarios(newFuncionarios);
         }
@@ -47,7 +47,7 @@ export default function useFuncionarios() {
 
   async function excluirFuncionario(currentFuncionario: Funcionario) {
     await instance
-      .delete(`funcionarios/${currentFuncionario.id}`)
+      .delete(`employees/${currentFuncionario.id}`)
       .then((response) => {
         console.log(response);
       })
@@ -59,9 +59,9 @@ export default function useFuncionarios() {
 
   async function criarFuncionario(currentFuncionario: Funcionario) {
     instance
-      .post('/funcionarios', {
+      .post('/employees', {
         name: currentFuncionario.name,
-        clinicaId: +currentFuncionario.clinicaId,
+        clinicId: +currentFuncionario.clinicaId,
       })
       .then(() => {
         console.log(`${currentFuncionario.name} Criado com sucesso`);
@@ -74,7 +74,7 @@ export default function useFuncionarios() {
 
   async function atualizarFuncionario(currentFuncionario: Funcionario) {
     instance
-      .put(`/funcionarios/${currentFuncionario.id}`, {
+      .put(`/employees/${currentFuncionario.id}`, {
         name: currentFuncionario.name,
         clinicaId: +currentFuncionario.clinicaId,
       })

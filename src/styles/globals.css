@@ -14,3 +14,17 @@ a {
 * {
   box-sizing: border-box;
 }
+
+p {
+  font-size: 24px;
+}
+
+.imagemEsquerda {
+  float: left;
+  margin-right: 20px;
+}
+
+.imagemDireita {
+  float: right;
+  margin-left: 20px;
+}

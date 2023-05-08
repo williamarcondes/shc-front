@@ -44,7 +44,7 @@ export default function Formulario(props: FormularioProps) {
         <Button
           cor='blue'
           className='mr-2'
-          onClick={() => props.clinicaMudou?.(new Clinica(id, name, city, uf, number, street))}
+          onClick={() => props.clinicaMudou?.(new Clinica(id, name, city, uf, number, street, []))}
         >
           {id ? 'Alterar' : 'Salvar'}
         </Button>

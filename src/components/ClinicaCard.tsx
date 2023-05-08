@@ -2,6 +2,7 @@ import Button from './Button';
 import Clinica from '../core/Clinica';
 import useFuncionarios from '../hooks/useFuncionarios';
 import FormularioFuncionario from './FormularioFuncionario';
+import TableFuncionario from './TableFuncionario';
 
 interface ClinicaProps {
   clinica: Clinica;
@@ -9,7 +10,7 @@ interface ClinicaProps {
 }
 
 export default function ClinicaCard(props: ClinicaProps) {
-  const { novoFuncionario, hideForms, visible, funcionario } = useFuncionarios();
+  const { novoFuncionario, hideForms, visible, funcionario, funcionarios, salvarFuncionario } = useFuncionarios();
 
   return (
     <div className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
@@ -34,11 +35,16 @@ export default function ClinicaCard(props: ClinicaProps) {
           ID: {props.clinica.id}
         </span>
       </div>
+      
+      {<TableFuncionario
+        funcionarios={funcionarios}
+      />}
+
       {visible === 'form' ? (
         <FormularioFuncionario
           clinica={props.clinica}
           cancelado={hideForms}
-          funcionarioMudou={novoFuncionario}
+          funcionarioMudou={salvarFuncionario}
           funcionario={funcionario}
         />
       ) : (

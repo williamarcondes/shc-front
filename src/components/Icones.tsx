@@ -1,10 +1,10 @@
 export const IconeLogo = (
-  <svg viewBox='0 0 500 500' width='5%' height='5%' stroke='currentColor'
+  <svg viewBox='0 0 500 500' width='8%' height='8%' stroke='currentColor'
   >
     <g transform='rotate(180, 250, 250)'>
       <path
         d='M250,50 L435,200 A130,130 0 0,1 250,450 A130,130 0 0,1 65,200 L250,50 Z'
-        fill='#BF0A30'
+        fill='#2432C9'
         strokeLinecap='round'
         strokeLinejoin='round'
         strokeWidth={2}

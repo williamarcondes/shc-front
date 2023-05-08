@@ -1,3 +1,5 @@
+import Funcionario from './Funcionario';
+
 /* eslint-disable max-params */
 export default class Clinica {
   #id: number;
@@ -6,6 +8,7 @@ export default class Clinica {
   #uf: string;
   #number: number;
   #street: string;
+  #funcionarios: Funcionario[];
 
   constructor(
     id: number,
@@ -14,6 +17,7 @@ export default class Clinica {
     uf: string,
     number: number,
     street: string,
+    funcionarios: Funcionario[],
   ) {
     this.#id = id;
     this.#name = name;
@@ -21,10 +25,11 @@ export default class Clinica {
     this.#street = street;
     this.#number = number;
     this.#uf = uf;
+    this.#funcionarios = funcionarios;
   }
 
   static vazio() {
-    return new Clinica(0, '', '', '', 0, '');
+    return new Clinica(0, '', '', '', 0, '', []);
   }
 
   get id() {
@@ -49,5 +54,13 @@ export default class Clinica {
 
   get street() {
     return this.#street;
+  }
+
+  get funcionarios() {
+    return this.#funcionarios;
+  }
+
+  adicionarFuncionario(funcionario: Funcionario) {
+    this.#funcionarios.push(funcionario);
   }
 }
