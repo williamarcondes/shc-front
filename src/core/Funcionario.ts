@@ -2,12 +2,12 @@
 export default class Funcionario {
   #id: number;
   #name: string;
-  #clinicaId: number;
+  #clinicId: number;
 
-  constructor(id: number, name: string, clinicaId: number) {
+  constructor(id: number, name: string, clinicId: number) {
     this.#id = id;
     this.#name = name;
-    this.#clinicaId = clinicaId;
+    this.#clinicId = clinicId;
   }
 
   static vazio() {
@@ -18,8 +18,8 @@ export default class Funcionario {
     return this.#id;
   }
 
-  get clinicaId() {
-    return this.#clinicaId;
+  get clinicId() {
+    return this.#clinicId;
   }
 
   get name() {

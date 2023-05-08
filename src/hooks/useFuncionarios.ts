@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Funcionario from '../core/Funcionario';
 
-export default function useFuncionarios(clinicaId: number) {
+export default function useFuncionarios(clinicId: number) {
   const [visible, setVisible] = useState<'form' | ''>('');
   useEffect(() => {}, [visible]);
 
@@ -23,7 +23,7 @@ export default function useFuncionarios(clinicaId: number) {
 
   function obterTodos() {
     instance
-      .get('employees')
+      .get(`employees?clinicId=${clinicId}`)
       .then((response) => {
         const newFuncionarios = response.data.employees;
         if (JSON.stringify(newFuncionarios) !== JSON.stringify(funcionarios)) {
@@ -61,7 +61,7 @@ export default function useFuncionarios(clinicaId: number) {
     instance
       .post('/employees', {
         name: currentFuncionario.name,
-        clinicId: +currentFuncionario.clinicaId,
+        clinicId: +currentFuncionario.clinicId,
       })
       .then(() => {
         console.log(`${currentFuncionario.name} Criado com sucesso`);
@@ -76,7 +76,7 @@ export default function useFuncionarios(clinicaId: number) {
     instance
       .put(`/employees/${currentFuncionario.id}`, {
         name: currentFuncionario.name,
-        clinicaId: +currentFuncionario.clinicaId,
+        clinicId: +currentFuncionario.clinicId,
       })
       .then(() => {
         console.log(`${currentFuncionario.name} Atualizado com sucesso`);

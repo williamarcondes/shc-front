@@ -10,7 +10,8 @@ interface ClinicaProps {
 }
 
 export default function ClinicaCard(props: ClinicaProps) {
-  const { novoFuncionario, hideForms, visible, funcionario, funcionarios, salvarFuncionario } = useFuncionarios();
+  const { novoFuncionario, hideForms, visible, funcionario, funcionarios, salvarFuncionario } =
+    useFuncionarios(props.clinica.id);
 
   return (
     <div className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
@@ -21,7 +22,7 @@ export default function ClinicaCard(props: ClinicaProps) {
             Editar
           </Button>
           <Button cor='blue' onClick={novoFuncionario}>
-            Adicionar Funcionário
+            Adicionar Funcionários
           </Button>
         </div>
       </div>
@@ -35,10 +36,8 @@ export default function ClinicaCard(props: ClinicaProps) {
           ID: {props.clinica.id}
         </span>
       </div>
-      
-      {<TableFuncionario
-        funcionarios={funcionarios}
-      />}
+
+      {<TableFuncionario funcionarios={funcionarios} />}
 
       {visible === 'form' ? (
         <FormularioFuncionario
